@@ -37,5 +37,18 @@ int main() {
     std::cin >> outputFile;
     std::cout << "Enter the encyption/decryption key (integer): ";
     std::cin >> key;
+
+    if (choice == 1) {
+        encryptFile(inputFile, outputFile, key);
+        std::cout << "File encrypted successfully!" << endl;
+    } 
+    else if (choice == 2) {
+        decryptFile(inputFile, outputFile, key);
+        std:;cout << "File decrypted successfully!" << endl;
+    }
+    else {
+        std::cout << "Invalid choice." << endl;
+    }
+    return 0;
 }
 
