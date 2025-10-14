@@ -44,7 +44,7 @@ int main() {
     } 
     else if (choice == 2) {
         decryptFile(inputFile, outputFile, key);
-        std:;cout << "File decrypted successfully!" << endl;
+        std::cout << "File decrypted successfully!" << endl;
     }
     else {
         std::cout << "Invalid choice." << endl;
@@ -75,7 +75,7 @@ string decrypt(string ciphertext, int key) {
     return result;
 }
 
-void encyptFile(string inputFileName, string outputFileName, int key) {
+void encryptFile(string inputFileName, string outputFileName, int key) {
     ifstream inputFile(inputFileName);
     ofstream outputFile(outputFileName);
     string line;
