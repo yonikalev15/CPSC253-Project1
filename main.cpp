@@ -23,7 +23,7 @@ int main() {
     int key;
 
     std::cout << "========================================" << endl;
-    std::cout << "  File Encyption/Decryption Program" << endl;
+    std::cout << "  File Encryption/Decryption Program" << endl;
     std::cout << "  Technique: Substitution Cipher" << endl;
     std::cout << "========================================" << endl;
     std::cout << "1. Encrypt a file" << endl;
@@ -35,7 +35,7 @@ int main() {
     std::cin >> inputFile;
     std::cout << "Enter the output file name: ";
     std::cin >> outputFile;
-    std::cout << "Enter the encyption/decryption key (integer): ";
+    std::cout << "Enter the encryption/decryption key (integer): ";
     std::cin >> key;
 
     if (choice == 1) {
@@ -52,3 +52,71 @@ int main() {
     return 0;
 }
 
+
+string encrypt(string plaintext, int key) {
+    string result = "";
+    for (int i = 0; i < plaintext.length(); i++) {
+        char c = plaintext[i];
+        int shift = (key + i * 7) % 256;
+        char encrypted = c + shift;
+        result += encrypted;
+    }
+    return result;
+}
+
+string decrypt(string ciphertext, int key) {
+    string result = "";
+    for (int i = 0; i < ciphertext.length(); i++) {
+        char c = ciphertext[i];
+        int shift = (key + i * 7) % 256;
+        char decrypted = c - shift;
+        result += decrypted;
+    }
+    return result;
+}
+
+void encyptFile(string inputFileName, string outputFileName, int key) {
+    ifstream inputFile(inputFileName);
+    ofstream outputFile(outputFileName);
+    string line;
+
+    if (!inputFile.is_open()) {
+        std::cout << "Error: Cannot open input file!" << endl;
+        return;
+    }
+
+    if (!outputFile.is_open()) {
+        std::cout << "Error: Cannot create output file!" << endl;
+        return;
+    }
+
+    while (getline(inputFile, line)) {
+        outputFile << encrypt(line, key) << endl;
+    }
+
+    inputFile.close();
+    outputFile.close();
+}
+
+void decryptFile(string inputFileName, string outputFileName, int key) {
+    ifstream inputFile(inputFileName);
+    ofstream outputFile(outputFileName);
+    string line;
+
+    if (!inputFile.is_open()) {
+        std::cout << "Error: Cannot open input file!" << endl;
+        return;
+    }
+
+    if (!outputFile.is_open()) {
+        std::cout << "Error: Cannot create output file!" << endl;
+        return;
+    }
+
+    while (getline(inputFile, line)) {
+        outputFile << decrypt(line, key) << endl;
+    }
+
+    inputFile.close();
+    outputFile.close();
+}
